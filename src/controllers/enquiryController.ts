@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import fs from 'fs';
 import path from 'path';
+import { forwardEnquiryEmail } from '../services/emailService.js';
 
 export interface EnquiryRecord {
   id: string;
@@ -76,6 +77,20 @@ export const createEnquiry = async (req: Request, res: Response) => {
     writeEnquiries(existing);
 
     console.log(`[TCH Support] New enquiry received: ${referenceId} from ${newRecord.name} (${newRecord.phone})`);
+
+    // Asynchronously forward email to geomadappallil@gmail.com from admin@tchservices.com.au
+    forwardEnquiryEmail({
+      referenceId,
+      name: newRecord.name,
+      phone: newRecord.phone,
+      email: newRecord.email,
+      suburb: newRecord.suburb,
+      enquiryType: newRecord.enquiryType,
+      service: newRecord.service,
+      message: newRecord.message,
+      fundingType: newRecord.fundingType,
+      timestamp: newRecord.timestamp
+    }).catch(emailErr => console.error('[Enquiry Email Forward Error]:', emailErr));
 
     return res.status(201).json({
       success: true,
