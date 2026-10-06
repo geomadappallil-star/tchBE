@@ -168,11 +168,11 @@ export function generateClientAcknowledgmentHtml(data: EmailEnquiryData): string
     </div>
     <div class="content">
       <p>Hello <strong>${data.name}</strong>,</p>
-      <p>Thank you for reaching out to TCH Support Services. We have received your enquiry regarding <strong>${data.service}</strong> (Reference: <strong>${data.referenceId}</strong>).</p>
-      <p>Our service delivery team led by <strong>Alan Jomon</strong> reviews enquiries immediately. Alan will phone you shortly at <strong>${data.phone}</strong> to discuss your support or property inspection requirements.</p>
+      <p style="font-size:16px; font-weight:600; color:#083A34; margin:16px 0;">Thanks for reaching out to us, our support team will get back to assist you.</p>
+      <p>We have received your callback request regarding <strong>${data.service}</strong> (Reference: <strong>${data.referenceId}</strong>). Our local team will contact you shortly at <strong>${data.phone}</strong>.</p>
       <p>If your enquiry is urgent, you can also reach Alan directly at <a href="tel:0431430905" style="color:#0E6E64; font-weight:700;">0431 430 905</a>.</p>
       <br>
-      <p style="margin:0;">Warm regards,<br><strong>Alan Jomon</strong><br>Manager – Service Delivery<br>TCH Support Services</p>
+      <p style="margin:0;">Warm regards,<br><strong>TCH Support Services Team</strong><br>Townsville · Ingham · Charters Towers</p>
     </div>
     <div class="footer">
       &copy; 2026 TCH Support Services · Townsville QLD · <a href="https://www.tchservices.com.au" style="color:#E3A83B;">www.tchservices.com.au</a>
@@ -219,12 +219,13 @@ export async function forwardEnquiryEmail(data: EmailEnquiryData): Promise<{ sen
     // If client supplied email, send acknowledgment
     if (data.email && data.email.includes('@')) {
       try {
-        await transporter.sendMail({
+        const clientInfo = await transporter.sendMail({
           from: `"TCH Support Services" <${FROM_EMAIL}>`,
           to: data.email,
-          subject: `Enquiry Received - TCH Support Services [${data.referenceId}]`,
+          subject: `Thanks for reaching out - TCH Support Services [${data.referenceId}]`,
           html: generateClientAcknowledgmentHtml(data)
         });
+        console.log(`[EMAIL ACKNOWLEDGMENT SUCCESS] Message ID: ${clientInfo.messageId} to ${data.email}`);
       } catch (clientErr) {
         console.warn('[EMAIL ACKNOWLEDGMENT WARNING] Could not send client copy:', clientErr);
       }
