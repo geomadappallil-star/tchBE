@@ -22,8 +22,9 @@ const FROM_EMAIL = process.env.SMTP_USER || 'admin@tchservices.com.au';
 function createTransporter() {
   const host = process.env.SMTP_HOST;
   const user = process.env.SMTP_USER || 'admin@tchservices.com.au';
-  const pass = process.env.SMTP_PASS;
-  const port = parseInt(process.env.SMTP_PORT || '587', 10);
+  const rawPass = process.env.SMTP_PASS;
+  const pass = rawPass ? rawPass.replace(/["'\s]/g, '') : undefined;
+  const port = parseInt(process.env.SMTP_PORT || '465', 10);
   const secure = process.env.SMTP_SECURE === 'true' || port === 465;
 
   if (host && pass) {
