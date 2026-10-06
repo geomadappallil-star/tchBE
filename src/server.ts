@@ -34,7 +34,7 @@ app.use('/api', apiRoutes);
 app.get('/', (req: Request, res: Response) => {
   res.json({
     name: 'TCH Health & Support Services API',
-    description: 'Townsville clinical nursing, yard & home care, and agency staffing services backend.',
+    description: 'Townsville clinical nursing, allied health therapies, yard & home care, and housing services backend.',
     version: '1.0.0',
     documentation: '/api/health',
     status: 'online'

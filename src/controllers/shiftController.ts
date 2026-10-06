@@ -89,7 +89,7 @@ export const createShiftRequest = async (req: Request, res: Response) => {
     existing.unshift(newRecord);
     writeShifts(existing);
 
-    console.log(`[TCH Agency Staffing] Shift request ${referenceId} submitted by ${providerName} for ${roleRequired}`);
+    console.log(`[TCH Care & Allied Health] Shift request ${referenceId} submitted by ${providerName} for ${roleRequired}`);
 
     return res.status(201).json({
       success: true,

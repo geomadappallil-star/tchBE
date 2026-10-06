@@ -1,6 +1,6 @@
 # TCH Health Backend (tchBE)
 
-Backend REST API for **TCH Support Services (TCH Health)** — delivering clinical nursing, home & yard care, and agency staffing across Townsville and North Queensland.
+Backend REST API for **TCH Support Services (TCH Health)** — delivering clinical nursing, allied health therapies, home & yard care, and housing supports across Townsville, Ingham, and Charters Towers.
 
 ## Features
 
