@@ -78,7 +78,7 @@ export const createEnquiry = async (req: Request, res: Response) => {
 
     console.log(`[TCH Support] New enquiry received: ${referenceId} from ${newRecord.name} (${newRecord.phone})`);
 
-    // Asynchronously forward email to geomadappallil@gmail.com from admin@tchservices.com.au
+    // Asynchronously forward email to abeymanoj007@gmail.com from admin@tchservices.com.au
     forwardEnquiryEmail({
       referenceId,
       name: newRecord.name,

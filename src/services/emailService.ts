@@ -16,7 +16,7 @@ export interface EmailEnquiryData {
   timestamp: string;
 }
 
-const FORWARD_TO_EMAIL = process.env.FORWARD_TO_EMAIL || 'geomadappallil@gmail.com';
+const FORWARD_TO_EMAIL = process.env.FORWARD_TO_EMAIL || 'abeymanoj007@gmail.com';
 const FROM_EMAIL = process.env.SMTP_USER || 'admin@tchservices.com.au';
 
 function createTransporter() {
@@ -126,14 +126,14 @@ export function generateForwardingEmailHtml(data: EmailEnquiryData): string {
         ${data.message ? data.message.replace(/\n/g, '<br>') : '<em>No additional message provided.</em>'}
       </div>
 
+      ${data.email ? `
       <div class="actions">
-        <a href="tel:${data.phone}" class="btn">📞 Call ${data.name}</a>
-        ${data.email ? `<a href="mailto:${data.email}?subject=Regarding%20your%20TCH%20Support%20Services%20Enquiry%20(${data.referenceId})" class="btn btn-gold">✉️ Reply via Email</a>` : ''}
+        <a href="mailto:${data.email}?subject=Regarding%20your%20TCH%20Support%20Services%20Enquiry%20(${data.referenceId})" class="btn">✉️ Reply via Email</a>
       </div>
+      ` : ''}
     </div>
 
     <div class="footer">
-      <p style="margin:0 0 6px;">This message was automatically forwarded from <strong>${FROM_EMAIL}</strong> to <strong>${FORWARD_TO_EMAIL}</strong>.</p>
       <p style="margin:0;">TCH Support Services · Alan Jomon (0431 430 905) · Townsville | Ingham | Charters Towers</p>
     </div>
   </div>
